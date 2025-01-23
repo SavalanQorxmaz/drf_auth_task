@@ -8,12 +8,9 @@ from rest_framework_simplejwt.views import (
 from users.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path('register/',RegisterView.as_view(), name='register'),
-    path('login/',LoginAPIView.as_view()),
-    path('logout/', LogoutAPIView.as_view()),
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),  # DRF-nin daxili autentifikasiyası
+    path("api/auth/google/", GoogleLogin.as_view(), name="google_login"),            # Google OAuth2 üçün
+    path("auth/", include("users.urls")), 
     
 ]
